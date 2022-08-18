@@ -1,0 +1,51 @@
+<html>
+<head></head>
+<body>
+	<canvas width="600" height="600"></canvas>
+	<script>
+		function escreveTexto(texto, x, y) {
+			var tela = document.querySelector('canvas');
+			var pincel = tela.getContext('2d');
+			pincel.fillStyle = 'red';
+			pincel.font = '20px Verdana';
+			pincel.fillText(texto, x, y);
+		}
+		function desenhaArc(x, y, raio) {
+			var tela = document.querySelector('canvas');
+			var pincel = tela.getContext('2d');
+			pincel.strokeStyle = 'red';
+			pincel.beginPath();
+			pincel.arc(x, y, raio, 0, 2*Math.PI);
+			pincel.fill();
+		}
+		function desenhaTriangulo(xA, yA, xC, yC, cor) {
+			var tela = document.querySelector('canvas');
+			var pincel = tela.getContext('2d');
+			pincel.fillStyle = cor;
+			pincel.beginPath();
+			pincel.moveTo(xA, yA);
+			pincel.lineTo(xC, yC);
+			var xB = xA;
+			var yB = yC;
+			pincel.lineTo(xB, yB);
+			pincel.fill();
+		}
+		function desenhaEsquadro(abscissaA, ordenadaA, abscissaC, ordenadaC, cor) {
+			var texto = ['A (50, 50)', 'B (50, 400)', 'C (400, 400)'];
+			var coordenadasX = [40, 50, 410];
+			var coordenadasY = [40, 430, 400];
+			var raio = 5;
+			var x = [50, 50, 400];
+			var y = [50, 400, 400];
+			for(var i = 0; i <= texto.length; i++) {
+				escreveTexto(texto[i], coordenadasX[i], coordenadasY[i]);
+				desenhaArc(x[i], y[i], raio);
+			}
+			desenhaTriangulo(abscissaA, ordenadaA, abscissaC, ordenadaC, cor);
+			desenhaTriangulo(abscissaA, ordenadaA, abscissaC, ordenadaC, cor);	
+		}
+		desenhaEsquadro(50, 50, 400, 400, 'black');
+		desenhaEsquadro(100, 175, 275, 350, 'white');
+	</script>
+</body>
+</html>
